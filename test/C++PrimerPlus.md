@@ -299,3 +299,23 @@ switch (integer-expression)
     2. 使用文本读取 除非输入的文件名包含路径，否则程序将在可执行文件所属的文件夹中查找
 
 ***结构中字符串数组赋值时不能使用赋值符号，必须使用字符串赋值函数。***
+
+## 函数
+1. 定义函数：有返回值与无返回值
+无返回值函数称为void函数，通用格式
+```cpp
+void functionName(parameterList)
+{
+    statement(s)
+    return; //optional
+}
+```
+有返回值函数，通用格式：
+```cpp
+typeName functionName(parameterList)
+{
+    statements;
+    return value; //value is tpe cast to type typeName
+}
+```
+**C++对于返回值的类型有一定限制：不能是*数组*，但可以使其他任何类型，甚至可以是结构和对象（虽然不能直接返回数组，但可以将数组作为结构或对象组成部分来返回）。**
