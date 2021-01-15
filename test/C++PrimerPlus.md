@@ -315,7 +315,21 @@ void functionName(parameterList)
 typeName functionName(parameterList)
 {
     statements;
-    return value; //value is tpe cast to type typeName
+    return value; //value is type cast to type typeName
 }
 ```
-**C++对于返回值的类型有一定限制：不能是*数组*，但可以使其他任何类型，甚至可以是结构和对象（虽然不能直接返回数组，但可以将数组作为结构或对象组成部分来返回）。**
+**C++对于返回值的类型有一定限制：不能是*数组*，但可以使其他任何类型，甚至可以是结构和对象（虽然不能直接返回数组，但可以将数组作为结构或对象组成部分来返回）。** 
+
+2. 函数在执行返回语句后结束，函数执行遇到第一条返回语句后结束。
+3. 函数原型是必不可少的，但是函数原型不要求提供变量名，只提供变量类型即可。
+4. 用于接收传递值的变量称为形参，用parameter参量表示形参，传递给函数的值称为实参，用参数argument表示。
+5. C++将数组名解释为其第一个元素的地址。但是有一些例外：
+    1、数组声明使用数组名来标记存储位置；
+    2、对数组使用`sizeof`将得到整个数组的长度（以字节为单位）；
+    3、将地址运算符&应用于数组名时，将返回整个数组的地址。
+6. 在函数参数中可以使用`int Arr[]`传入的是数组第一个元素的地址，但是在函数体内不能使用。
+7. `const double arr[]`表明指针指向常量数据，不能使用arr修改数据（只读）。
+8. 使用数组区间的函数`int sumArr(const int *begin,const int *end)`开始的位置与结束的位置，必须按正确的位置传递指针。
+9. `const int *p` 其中const修饰int表示指针指向常量，即*p必须为常量；  
+   `int * const p` 其中const修饰p表示指针为常量，指针的位置不能变。
+10. 
