@@ -330,6 +330,28 @@ typeName functionName(parameterList)
 6. 在函数参数中可以使用`int Arr[]`传入的是数组第一个元素的地址，但是在函数体内不能使用。
 7. `const double arr[]`表明指针指向常量数据，不能使用arr修改数据（只读）。
 8. 使用数组区间的函数`int sumArr(const int *begin,const int *end)`开始的位置与结束的位置，必须按正确的位置传递指针。
-9. `const int *p` 其中const修饰int表示指针指向常量，即*p必须为常量；  
-   `int * const p` 其中const修饰p表示指针为常量，指针的位置不能变。
-10. 
+9. `const int *p` 其中const修饰int表示指针指向常量，即*p必须为常量，防止使用指针修改指针所指向的值；(禁止修改p指向的值，但是可以指向另一个常量)
+    ```cpp
+    int age = 39;
+    const int *pt = &age;
+    *pt += 1; //INVALID
+    cin >> *pt; //INVALID
+
+    *pt = 20; //INVALID
+    age = 20; //VALID
+    ```  
+    ```cpp
+    const float g_earth = 9.80;
+    const float * pe = &g_earth; //VALID
+
+    const float g_moon = 1.63;
+    float * pm = &g_moon; //INVALID 这种情况下指针可以改变常量的值，使得const显得很荒谬
+    ```
+   `int * const p` 其中const修饰p表示指针为常量，指针的位置不能变，防止改变指针指向的位置(可以用来修改i值，但是禁止改变指向的地址)。
+10. `int (*arr)[4]`一个指向由四个int组成的数组的指针。
+    `int *arr[4]`声明一个由四个指向int的指针组成的数组。
+    `int arr[][4]`arr是指针而不是数组，指向由4个int指向的数组。
+11. 最简单的方法是将arr看作二维数组的名称。
+12. *函数和结构* 结构可以作为参数，函数也可以返回结构。当结构比较小时，按值传递比较合理. 函数形参为结构的地址，此时应该使用间接成员运算符(->)而不是成员运算符(.)  **形参类型为结构则使用的是结构副本，形成类型为指针使用的是原始结构。**
+13. *函数和string对象*  P236
+14. *函数和array对象* 可按值传递对象，这样处理的是对象的副本
