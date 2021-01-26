@@ -70,7 +70,7 @@ C++基本类型分为两组整数、浮点数
     * 存储在每个元素种值的类型；
     * 数组名；
     * 数组中元素数。
-> `typename arrayName[arraySize]`  `arragSize`必须是整型常量或`const`值也可以是常量表达式。  
+        > `typename arrayName[arraySize]`  `arragSize`必须是整型常量或`const`值也可以是常量表达式。  
 2. C++数组从0开始编号。
 3. 数组初始化规则：
     * 只有定义数组时才能使用初始化，此后不能再使用，也不能将一个数组赋给另一个数组
@@ -88,56 +88,56 @@ C++基本类型分为两组整数、浮点数
 4. 任何两个由空白（空格、制表符和换行符）分隔的字符串常量会被自动拼接成一个。
 5. 字符数组的长度不能短于`strlen(cosmic)+1`
 6. `cin.getline(arrayName.arraySize)` 通过换行符确定行尾，但不保存换行符。
->第三个参数暂不讨论，后续讨论  
+    >第三个参数暂不讨论，后续讨论  
 7. `cin.get()`一种变体与上一函数参数类似，但将换行符留在输入队列中；
 还有另一种变体`cin.get()`不带参数 可读取下一字符，具体使用方法：
-```C++
-cin.get(arrayName1.Size);
-cin.get();
-cin.get(arrayName2,Size);
-```
-或：
-```C++
-cin.get(arrayName1.Size).get();
-cin.get(arrayName2,Size);
-```
+    ```C++
+    cin.get(arrayName1.Size);
+    cin.get();
+    cin.get(arrayName2,Size);
+    ```
+    或：
+    ```C++
+    cin.get(arrayName1.Size).get();
+    cin.get(arrayName2,Size);
+    ```
 8. String类隐藏了字符串的数组性质：
     * **不能将一个数组赋给另一个数组，可以将一个`String`对象赋给另一个`String`对象；
     * 可以使用运算符`+`合并字符串，使用`+=`将字符串加到末尾；
 9. 原始（raw）字符串 `P87`。
 ### 结构
 1. 结构的定义方式：
-```C++
-struct structType
-{
-    type name;
-    ...
-};
-structType name=
-{
-    value,
-    value
-};
-```
+    ```C++
+    struct structType
+    {
+        type name;
+        ...
+    };
+    structType name=
+    {
+        value,
+        value
+    };
+    ```
 2. C++允许在声明结构变量时省略关键字`struct`。 可以使用成员运算符`(.)`来访问各个成员。
 3. **C++不提倡使用外部变量，但提倡使用外部结构声明，另外在外部声明符号常量更合理。**
 ### 共用体
 共用体（union）是一种数据格式，能存储不同的数据类型，但只能同时存储一种类型，常用于节省内存，用于操作系统数据结构或硬件数据结构。
 ### 枚举
 1. 使用赋值运算符显式的设置枚举量的值：
-```C++
-enum bits{one=1,two=2,four=4,eight=8};
-```
-也可以只显式的定义其中一些枚举量的值，没有被初始化的枚举量的值将比前面的枚举量大1.
-```C++
-enum bigstep{first,second=100,third}
-```
-这里`first`的默认情况为0，没被初始化的枚举量比前面大1，所以`third`为101.
+    ```C++
+    enum bits{one=1,two=2,four=4,eight=8};
+    ```
+    也可以只显式的定义其中一些枚举量的值，没有被初始化的枚举量的值将比前面的枚举量大1.
+    ```C++
+    enum bigstep{first,second=100,third}
+    ```
+    这里`first`的默认情况为0，没被初始化的枚举量比前面大1，所以`third`为101.
 可以创建多个值相同的枚举量：
-```C++
-enum{zero,null=0,one,numero_uno=1};
-```
-其中，zero和null都为0.
+    ```C++
+    enum{zero,null=0,one,numero_uno=1};
+    ```
+    其中，zero和null都为0.
 2. 枚举的取值范围定义：要找出上限，知道枚举量的最大值，找到大于最大值最小的2的幂，将他减去1，得到的便是取值范围的上限；下限，要知道枚举量的最小值，如果它不小于0，则取值范围的下限为0；否则寻找小于最小值的最大2的幂，减去-1.
 ### 指针和自由存储空间
 1. 变量的地址 变量名前加 &
@@ -146,33 +146,33 @@ enum{zero,null=0,one,numero_uno=1};
 3. `updates`和`* p_updates`完全等价表示值，`&updates`和`p_dates`完全等价表示地址。
 4. **一定要在对指针应用解除引用运算符（*）之前，将指针初始化为一个确定的、适当的地址。**
 5. 要将数字值作为地址来用，应通过强制类型转换将数字转换为适当的地址类型：
-```C++
-int *pt;
-pt=(int *) 0xB8000000;
-```
+    ```C++
+    int *pt;
+    pt=(int *) 0xB8000000;
+    ```
 6. 指针真正的用处：在运行阶段分配未命名的内存以存储值
 为一个数据对象（可以是结构或基本类型）获得并指定分配内存的通用格式：
-```C++
-typeName * pointer_name = new typeName;
-```
+    ```C++
+    typeName * pointer_name = new typeName;
+    ```
 7. `delete`删除内存：
-```C++
-int *ps=new int ;
-...
-delete ps;
-```
-这将释放ps指向的内存，但不会删除ps本身，可将ps重新指向另一个新分配的内存块。**不能用delete释放声明变量获得的内存**，例如：
-```C++
-int juge=5;
-int *pi=&jugs;
-delete pi;
-```
+    ```C++
+    int *ps=new int ;
+    ...
+    delete ps;
+    ```
+    这将释放ps指向的内存，但不会删除ps本身，可将ps重新指向另一个新分配的内存块。**不能用delete释放声明变量获得的内存**，例如：
+    ```C++
+    int juge=5;
+    int *pi=&jugs;
+    delete pi;
+    ```
 8. 数组静态联编和动态联编。
 使用new创建动态数组：
-```C++
-typeName *pointerName=new typeName [num]; 
-delete [] psome;
-```
+    ```C++
+    typeName *pointerName=new typeName [num]; 
+    delete [] psome;
+    ```
 9. 总之，使用`new`和`delete`时应注意遵守以下规则：
     * 不要使用delete释放不是new分配的内存块；
     * 不要使用delete释放同一个内存块两次；
@@ -180,10 +180,10 @@ delete [] psome;
     * 如果使用new为一个实体分配内存，则应使用delete（没有方括号）来释放；
     * 对空指针应用delete是安全的。
 10. 指针与数组名：
->使用数组表示法时：arrayName[i] becomes *(arrayName+1)
-使用指针表示法时： pointName[i] becomes *(pointName+1)  
+    >使用数组表示法时：arrayName[i] becomes *(arrayName+1)
+    使用指针表示法时： pointName[i] becomes *(pointName+1)  
 
-区别是可以修改指针的值但是数组名是常量。另外，对数组应用`sizeof`得到的是数组的长度而对指针得到的是指针的长度。
+    区别是可以修改指针的值但是数组名是常量。另外，对数组应用`sizeof`得到的是数组的长度而对指针得到的是指针的长度。
 11. `&tell[0]`和`tell`都是第一个元素的地址；`&tell`是整个数组内存块的地址。
 12. 在cout和C++表达式中，char数组名、char指针以及用引号括起的字符串常量都被解释为字符串第一个字符的地址。
 13. 使用new创建动态结构
@@ -191,26 +191,26 @@ delete [] psome;
 对于指针不能用成员运算符`.`应该使用`->`来访问成员（如果结构标识符是结构名，则使用句点运算符；如果是指向结构的指针，则使用箭头运算符）
 14. **自动存储** 在函数内部定义的常规变量使用自动存储空间，被称为自动变量（automatic variable），这意味着在所属函数被调用时自动产生，在函数结束是消亡。自动变量是局部变量作用域为包含它的代码块。通常存储在栈中，按后进先出（LIFO）。
 **静态存储** 是整个程序执行期间都存在的存储方式。使变量成为静态的方式：函数外面定义；声明变量时使用关键字`static`，严格限制了变量的寿命
-```cpp
-static type name=value
-```
-**动态存储** `new`和`delete`管理了一个内存池，在C++中被称为自由存储空间（free store）或堆（heap）。
+    ```cpp
+    static type name=value
+    ```
+    **动态存储** `new`和`delete`管理了一个内存池，在C++中被称为自由存储空间（free store）或堆（heap）。
 15. 避免内存泄漏的最好方法是同时使用`new`和`delete`，***智能指针***
 ### 类型组合
 P119
 ### 数组的替代品
 1. 模板类`vector`使用时要包含头文件：
-```cpp
-#include<vector>
-using namespace std;
-vector<typeName> vt(num);  //创建名为vt的vector对象，可存储num个typeName元素，num可以是整型常量也可以是整型变量。
-```
+    ```cpp
+    #include<vector>
+    using namespace std;
+    vector<typeName> vt(num);  //创建名为vt的vector对象，可存储num个typeName元素，num可以是整型常量也可以是整型变量。
+    ```
 2. 模板类array（C++11）其对象长度是固定的，也使用栈（静态内存分配） 创建语法：
-```cpp
-#include<array>
-using namespace std;
-array<typeName,num> arr; //与vector不同的是num不能是变量
-```
+    ```cpp
+    #include<array>
+    using namespace std;
+    array<typeName,num> arr; //与vector不同的是num不能是变量
+    ```
 3. 数组、vector对象、array对象都可以用标准数组表示法访问各元素；array和数组存储在相同内存区域（栈）vector存储在另一区域（自由存储区或堆）；array对象可以赋值给另一对象而数组必须逐元素复制。
 ## 循环和关系表达式
 1. 通常cout显示bool值之前将其转换为int，但`cout.setf(ios::boolalpha)`函数调用设置了一个标记命令cout显示true和false。 
@@ -234,19 +234,19 @@ array<typeName,num> arr; //与vector不同的是num不能是变量
 7. 关系运算符优先级比算术运算符低。
 8. 类型别名，建立别名的方式：
     * 使用预处理器,char替换所有的BYTE
-    ```cpp
-    #define BYTE char; //preprocessor replaces BYTE with char
-    ```
+        ```cpp
+        #define BYTE char; //preprocessor replaces BYTE with char
+        ```
     * 使用关键字`typedef`创建别名，不会创建新类型，只是为已有类型建立新名称
-    ```cpp
-    typedef typeName aliasName; //make aliasName an alias for typeName
-    ```
-    **使用`#define`不过声明一系列变量时不适用，例如：**
-    ```cpp
-    #define FLOAT_POINTER float *
-    FLOAT_POINTER pa,pb;
-    float * pa,pb; //pa a pointer to float,pbjust a float
-    ```
+        ```cpp
+        typedef typeName aliasName; //make aliasName an alias for typeName
+        ```
+        **使用`#define`不过声明一系列变量时不适用，例如：**
+        ```cpp
+        #define FLOAT_POINTER float *
+        FLOAT_POINTER pa,pb;
+        float * pa,pb; //pa a pointer to float,pbjust a float
+        ```
 9. 基于范围的for循环 对数组或容器类每个元素执行相同的操作：
     ```cpp
     double prices[5]={4.99,10.99,6.87,7.99,8.49};
@@ -269,23 +269,23 @@ array<typeName,num> arr; //与vector不同的是num不能是变量
 `&&`运算符优先级高于`OR`运算符
 4. 逻辑运算符另一种表示：
 
-| 运算符 | 另一种表示 |
-| ---- | ---- |
-| `&&` | and |
-| `||` | or |
-| `!` | not |
+    | 运算符 | 另一种表示 |
+    | ---- | ---- |
+    | `&&` | and |
+    | `||` | or |
+    | `!` | not |
 5. 字符函数库 cctype 简化诸如确定字符是否为大写字母、数字、标点符号等工作
 6. `?:`运算符 条件运算符 C++中唯一一个需要3个操作数的运算符，通用格式：`expression1 ? exxpression2 : expression3` 如果expression1为true则整个表达式的值为expression2的值，否则为expression3的值。
 7. switch语句 dafault可选，如果被省略又没有匹配的标签，则程序跳到switch后面的语句处执行。
-```cpp
-switch (integer-expression)
-{
-    case label1 : statements
-    case label2 : statements
-    ...
-    default : statements
-}
-```
+    ```cpp
+    switch (integer-expression)
+    {
+        case label1 : statements
+        case label2 : statements
+        ...
+        default : statements
+    }
+    ```
 8. `if else` 语句更适用于取值范围；switch语句每个case标签必须是单独的值。
 9. `break`语句使程序跳到switch或循环后面的语句处执行，即结束选择或循环
  `continue`语句用于循环时，让程序跳过循环体中余下的代码并开始新循环，并没有结束循环。
@@ -303,22 +303,22 @@ switch (integer-expression)
 ## 函数
 1. 定义函数：有返回值与无返回值
 无返回值函数称为void函数，通用格式
-```cpp
-void functionName(parameterList)
-{
-    statement(s)
-    return; //optional
-}
-```
-有返回值函数，通用格式：
-```cpp
-typeName functionName(parameterList)
-{
-    statements;
-    return value; //value is type cast to type typeName
-}
-```
-**C++对于返回值的类型有一定限制：不能是*数组*，但可以使其他任何类型，甚至可以是结构和对象（虽然不能直接返回数组，但可以将数组作为结构或对象组成部分来返回）。** 
+    ```cpp
+    void functionName(parameterList)
+    {
+        statement(s)
+        return; //optional
+    }
+    ```
+    有返回值函数，通用格式：
+    ```cpp
+    typeName functionName(parameterList)
+    {
+        statements;
+        return value; //value is type cast to type typeName
+    }
+    ```
+    **C++对于返回值的类型有一定限制：不能是*数组*，但可以使其他任何类型，甚至可以是结构和对象（虽然不能直接返回数组，但可以将数组作为结构或对象组成部分来返回）。** 
 
 2. 函数在执行返回语句后结束，函数执行遇到第一条返回语句后结束。
 3. 函数原型是必不可少的，但是函数原型不要求提供变量名，只提供变量类型即可。
@@ -354,4 +354,95 @@ typeName functionName(parameterList)
 11. 最简单的方法是将arr看作二维数组的名称。
 12. *函数和结构* 结构可以作为参数，函数也可以返回结构。当结构比较小时，按值传递比较合理. 函数形参为结构的地址，此时应该使用间接成员运算符(->)而不是成员运算符(.)  **形参类型为结构则使用的是结构副本，形成类型为指针使用的是原始结构。**
 13. *函数和string对象*  P236
-14. *函数和array对象* 可按值传递对象，这样处理的是对象的副本
+14. *函数和array对象* 可按值传递对象，这样处理的是对象的副本。
+15. *递归* C++函数可以调用自己，C++不允许main()调用自己，被称为递归。通常的递归调用放在if语句中。包含一个递归调用的递归：
+    ```cpp
+    void recurs(argumentlist)
+    {
+        statements1
+        if(test)
+            recurs(arguments)
+        statement2
+    }
+    ```
+    test最终将为false，调用链将断开。只要if语句为true每个recurs()调用都将执行statement1，然后再调用recurs()而不会执行statement2，当if语句为false时，当前调用将执行statement2，当前调用结束后，程序控制权将返回给调用它的recurs()，而该recurs()将执行其statement2部分，然后结束，并将控制权返回给前一个调用，依此类推。
+16. 包含多个递归调用的递归。在需要将一项工作不断分为两项较小的、类似的工作时递归非常有用，递归方法有时称为分而治之策略(divide-and-conquer strategy) 这将导致函数调用数(以及存储的变量数)翻倍，因此如果调用要求的递归层次很多，这种递归方式将是一种糟糕的选择，但是如果递归层次较少，这将是一种精致而简单的选择。
+17. *函数指针* 函数也有地址，函数的地址是存储其机器语言代码的内存的开始地址。
+18. * 获取函数地址 主要使用函数名（会面不跟参数）即可，如果think()是一个函数则think就说该函数的地址。**一定要区分传递的是函数的地址还是函数的返回值。
+        ```cpp
+        process(think); //passes address of think() to process()
+        thought(think()); //passes return value of think() to thought()
+        ```
+        process()调用是的该函数能够在其内部调用think()函数。
+    * 声明函数指针 声明指向某种数据类型的指针时，必须指定指针指向的类型，同样声明指向函数的指针时，也必须指定指针指向的函数类型，这意味着声明应指定函数的返回类型以及函数的特征标(参数列表)
+        ```cpp
+        double pam(int); //prototype
+        double (*pf)(int); //pf points to a function 
+                           //that takes one int argument 
+                           //and that returns type double
+        ```
+        这与pam()声明类似，将其替换为了(* pf),因此(* pf)也是函数，pf是就是函数指针。* pf(int)意味着pf()是一个返回指针的函数，而(* pf)(int)意味着pf是一个指向函数的指针。
+        ```cpp
+        double (*pf)(int); //pf points to a function that returns double
+        double * pf(int); //pf() a function that returns 
+                          //a pointer to a double 
+        ```
+        正确声明pf后，便可以将相应函数的地址赋给它
+        ```cpp
+        double pam(int);
+        double (*pf)(int);
+        pf = pam;  //pf now points to the pam() function
+        ```
+        注意，pam()的特征标和返回类型必须与pf相同。
+        ```cpp
+        double ned(double);
+        int ted(int);
+        double (*pf)(int);
+        pf = ned; //invalid--mismatched signature
+        pd = ted; //invalid--mismatched return types
+        ```
+    * 使用指针来调用函数 (* pf)扮演的角色与函数名相同，因此使用(* pf)时只需将他看作函数名即可
+        ```cpp
+        double pam(int);
+        double (*pf)(int);
+        pf = pam;          //pf now points to the pam() function
+        double x = pam(4); //call pam() using the function name
+        double y = (*pf)(5); //also call pam() using the pointer pf
+        ```
+        实际上C++也允许像使用函数名那样使用pf `double y = pf(5)`，但第一种格式给了强有力的提示--代码正在使用函数指针。
+19. 深入讨论函数指针 
+    假设三个函数： 
+    ```cpp
+    const double * f1(const double ar[],int n );
+    const double * f2(const double [],int );
+    const double * f3(const double *,int );
+
+    const double * (*p1)(const double *,int) = f1;
+    auto p2 = f2; //使用C++11的自动类型推断功能
+
+    cout<<(*p1)(av,3)<<": "<<*(*p1)(av,3)<<endl;
+    cout<<p2(av,3)<<": "<<*p2(av,3)<<endl;
+    ```
+    `(*p1)(av,3)`和`p2(av,3)`都调用指向的函数，因此显示的是函数值的返回值(即double值的地址)，后面显示的是值。 可声明一个数组其三个元素为指向函数的指针：
+    ```cpp
+    const double * (*pa[3])(const double *,int) = {f1,f2,f3};
+    ```
+    首先声明一个包含三个元素的数组`pa[3]`,运算符`[]`优先级高于`*`，因此`*pa[3]`表明`pa`是一个包含三个指针的数组，表明一个包含三个指向特征标为`(const double *,int)`返回值为`const double *`的函数的指针。
+    这里，不能使用`auto`，自动类型推断只能用于单值初始化而不能用于初始化列表，但是声明数组后声明同样类型的的数组可表示为`auto pb = pa`
+    `pa[i]`和`pb[i]`都表示数组中的指针：
+    ```cpp
+    const double * px = pa[0](av,3);
+    const double * py = (*pb[1])(av,3);
+
+    double x = *pa[0](av,3);
+    double y = *(*pb[1])(av,3);
+    ```
+    创建指向整个数组的指针，由于数组名pa是指向函数指针的指针，即它指向指针的指针，但由于可使用单个值对其进行初始化，因此可用auto：`auto pc = &pa;`
+    ```cpp
+    *pd[3]; //an array of 3 pointers
+    (*pd)[3]; //a pointer to an array of 3 elements
+
+    const double *(*(*pd)[3])(const double *,int) = &pa;
+    ```
+    `pd`指向数组，那么`* pd`就是数组，`(* pd)[i]`是数组中的元素，即函数指针，较简单的调用是`(* pd)[i](av,3)`,`* (* pd)[i](av,3)`是返回的指针指向的值，也可以使用`(* (* pd)[i])(av,3)`调用函数，`* (* (* pd)[i])(av,3)`是指向`double`的值。
+20. **`pa`(是数组名，表示地址),大多数情况下`pa`是数组第一个元素的地址即`&pa[0]`因此它是单个元素的地址；但`&pa`是整个数组的地址,表面上看两个值相同，但是类型不同，`pa+1`是数组中下一个元素的地址，而`&pa+1`是数组`pa`后面一个12字节内存卡的地址（这里假定地址为4字节）。另一个差别是要得到一个元素的值，只需对`pa`解除一次引用，但需要对`&pa`解出两次应用。`**&pa == *pa == pa[0]`**
